@@ -94,12 +94,15 @@ If $C_R$ is the clock rate, and $T_B$,$T_A$ are the execution times before and a
 
 \noindent \framebox{Part c}\\ 
 
-Writing a bunch of stuff and then moving on to the next part..\\
+With a single issue processor fastest we can process an instruction is in 1 clock cycle. So, the minimum CPI is 1.
 
+\newpage
 \noindent \framebox{Part d}\\ 
 
-Ok, now it is time to write some more stuff.. \\
-
+By using equation $(\ref{eqn:totalclocks})$ again and taking the minimum $CPI$ for division as $CPI_D = 1$ we can calculate the number of clock cycles for the program as\\
+\[ CC_{min} = CPI_D \cdot 0.1 \cdot I_T  + CPI_O \cdot 0.9 \cdot I_T  = 1\cdot 0.1 \cdot 20 \cdot 10^6 + 4 \cdot 0.9 \cdot 20 \cdot 10^6  = 74 \cdot 10^6 \; \text{instructions}\]
+Performing the same calculation as in part b gives
+\[ \text{Speed Up} =  \frac{T_B}{T_A} = \frac{\frac{CC_T^B}{C_R}}{\frac{CC_{min}}{C_R}} = \frac{CC_T^B}{CC_{min}} = \frac{96 \cdot 10^6}{74 \cdot 10^6} = 1.30\]
 
 \begin{flushleft} 
 Problem 3 \\
@@ -107,18 +110,32 @@ Problem 3 \\
 \end{flushleft} 
 \framebox{Part a}\\ 
 
-Writing a bunch of stuff and then moving on to the next part..\\
+The average $CPI$ for the instruction sequence can be calculated as the total number of clock cycles divided by the total number of instructions in the sequence. The subscript in each $CPI$ will refer to the which instruction the CPI is for. So, the average is 
+\begin{eqnarray*}
+CPI_{average} &=& \frac{4\cdot CPI_{addi} + 1\cdot CPI_{sub} +  2 \cdot CPI_{lw}  + 2 \cdot CPI_{sw}}{4+1+2+2} \\
+			&=& \frac{4\cdot 4 + 1 \cdot 5 + 2 \cdot 8 + 2 \cdot 6}{4+1+2+2} \\
+			&=& \frac{49}{9} = 5.44
+\end{eqnarray*}
 
 \noindent\framebox{Part b}\\ 
 
-Ok, now it is time to write some more stuff.. \\
+The derived formula for $MIPS$ can be used directly with $C_R$ as the clock rate:
+\begin{equation*}
+MIPS = \frac{C_R}{CPI_{average} \cdot 10^6} =  \frac{4 \cdot 10^9}{5.44 \cdot 10^6} = 735 \; \text{million instructions per second}
+\end{equation*}
+
 
 \noindent \framebox{Part c}\\ 
 
-Writing a bunch of stuff and then moving on to the next part..\\
+The peak $MIPS$ is found by finding an instruction set that minimizes the $CPI$. Since the $addi$ instruction has the least clock cycles required the best possible (but unrealistic) sequece of instruction consists of all $addi$ instructions. The $CPI$ would then be 4 so the peak $MIPS$ is 
+\begin{equation*}
+MIPS = \frac{C_R}{CPI_{min} \cdot 10^6} = \frac{4 \cdot 10^9}{4 \cdot 10^6} =  1000 \; \text{million instructions per second}
+\end{equation*}
+
 
 \noindent \framebox{Part d}\\ 
 
-Ok, now it is time to write some more stuff.. \\
+There are 4 addi, 1 sub, 2 lw, and 2 sw instructions with 6, 5, 8, and 6 clock cycles required respectively the total number of cycles is
+\[ \text{clock cycles} = 4\cdot CPI_{addi} + 1\cdot CPI_{sub} +  2 \cdot CPI_{lw}  + 2 \cdot CPI_{sw} = 4\cdot 4 + 1 \cdot 5 + 2 \cdot 8 + 2 \cdot 6 = 49 \]
 
 \end{document}  
